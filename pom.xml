@@ -9,11 +9,11 @@
     <url>http://maven.apache.org</url>
 	
 	<modules>
-		<module>open-core</module>
-		<module>open-sdk</module>
-		<module>open-test</module>
-		<module>open-biz</module>
-		<module>open-web</module>
+		<module>rop-core</module>
+		<module>rop-sdk</module>
+		<module>rop-test</module>
+		<module>rop-biz</module>
+		<module>rop-web</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,6 +39,11 @@
 	
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+		        <groupId>com.googlecode.xmemcached</groupId>
+		        <artifactId>xmemcached</artifactId>
+		        <version>1.4.3</version>
+		    </dependency>
 		    <dependency>
 		        <groupId>org.slf4j</groupId>
 		        <artifactId>slf4j-api</artifactId>
@@ -79,6 +84,34 @@
 			  <groupId>com.alibaba</groupId>
 			  <artifactId>fastjson</artifactId>
 			  <version>1.1.33</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba.toolkit</groupId>
+				<artifactId>toolkit-common-convert</artifactId>
+				<version>1.0</version>
+			</dependency>
+		    
+		    <dependency>
+			  <groupId>com.alipay</groupId>
+			  <artifactId>alipay-api</artifactId>
+			  <version>DEV20140210130531</version>
+			</dependency>
+	
+			<dependency>
+				<groupId>com.jolbox</groupId>
+				<artifactId>bonecp</artifactId>
+				<version>0.7.1.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>net.spy</groupId>
+				<artifactId>spymemcached</artifactId>
+				<version>2.11.4</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.danga</groupId>
+			    <artifactId>memcached</artifactId>
+			    <version>2.6.6</version>
 			</dependency>
 		
 			<dependency>
@@ -125,16 +158,150 @@
 			</dependency>
 			
 			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.4</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.6</version>
+			</dependency>		
+	
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.2.6</version>
+			</dependency>
+			
+			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-web</artifactId>
 				<version>${org.springframework.version}</version>
 			</dependency>
-
+	
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>${testng.version}</version>
+				<scope>test</scope>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.unitils</groupId>
+				<artifactId>unitils-core</artifactId>
+				<version>${unitils.version}</version>
+				<scope>test</scope>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.unitils</groupId>
+				<artifactId>unitils-testng</artifactId>
+				<version>${unitils.version}</version>
+				<scope>test</scope>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.unitils</groupId>
+				<artifactId>unitils-spring</artifactId>
+				<version>${unitils.version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-nop</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+	
+	
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernateValidator.version}</version>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-core-asl</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-jaxrs</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-xc</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+	
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-xml</artifactId>
+				<version>2.0.0-RC2</version>
+			</dependency>
+	
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
 				<version>${servlet.version}</version>
 				<scope>provided</scope>
+			</dependency>
+	
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${validation.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>1.6.11</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>1.6.11</version>
+			</dependency>
+		
+			<dependency>
+				<groupId>com.alibaba.antx</groupId>
+				<artifactId>antx-config</artifactId>
+				<version>1.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.codehaus.xdoclet</groupId>
+				<artifactId>xdoclet</artifactId>
+				<version>2.0.7</version>
+			</dependency>
+			
+			<dependency>
+			  <groupId>org.codehaus.xdoclet</groupId>
+			  <artifactId>xdoclet-plugin-externalizer</artifactId>
+			  <version>1.0.5</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.thoughtworks.qdox</groupId>
+				<artifactId>qdox</artifactId>
+				<version>1.12.1</version>
 			</dependency>
 			
 		</dependencies>
